@@ -24,6 +24,7 @@ class BitmapEditor
 
   def parse_line(line)
     params = line.chomp.split(' ')
+    # Validation here or for specific command?
   end
 
   attr_accessor :image
