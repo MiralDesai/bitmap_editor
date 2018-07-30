@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Tile
   def initialize(row:, column:, value: 'O')
     @row = row

@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 require './lib/image.rb'
 require 'pry'
 
 class BitmapEditor
-
   def run(file)
-    return puts "please provide correct file" if file.nil? || !File.exists?(file)
+    return puts 'please provide correct file' if file.nil? || !File.exist?(file)
     File.open(file).each do |line|
       whatever = parse_line(line)
       params = sanitize_params(whatever)
@@ -32,17 +33,17 @@ class BitmapEditor
   private
 
   def parse_line(line)
-    params = line.chomp.split(' ')
+    line.chomp.split(' ')
   end
 
   # Could santize for each command here but seems a bit much for now (map.with_index etc)
   def sanitize_params(params)
     params.map do |param|
       raise 'Unknown parameter, please check file' unless param.match(/[a-z]/) || param.match(/[A-Z]/) || param.match(/\d{1,3}/)
-      if param.match(/\d{1,3}/)
-        raise 'Coordinates must be between 0 and 250' if !param.to_i.between?(0, 250)
+      if param =~ /\d{1,3}/
+        raise 'Coordinates must be between 0 and 250' unless param.to_i.between?(0, 250)
         param.to_i
-      elsif param.match(/[a-z]/)
+      elsif param =~ /[a-z]/
         param.upcase
       else
         param
