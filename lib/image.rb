@@ -2,8 +2,8 @@ require './lib/tile.rb'
 
 class Image
   def initialize(column:, row:)
-    @column = column.to_i
-    @row = row.to_i
+    @column = column
+    @row = row
     create
   end
 
@@ -22,6 +22,10 @@ class Image
     tiles.map do |columns|
       columns.map { |tile| tile.value = 'O' }
     end
+  end
+
+  def set_colour_at(column:, row:, colour:)
+    tiles[column][row].value = colour
   end
 
   private
